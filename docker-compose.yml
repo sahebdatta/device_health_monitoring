@@ -2,7 +2,7 @@ version: "3.1"
 services:
 
   influxdb:
-    image: sahebdatta/devicehealth_database:v_0.1.0
+    image: sahebdatta/devicehealth_database:v_1.0.0
     container_name: influxdb
     restart: always
     environment:
@@ -25,7 +25,7 @@ services:
       - influxdb-volume:/var/lib/influxdb
 
   telegraf:
-    image: sahebdatta/devicehealth_telegraf:v_0.1.0
+    image: sahebdatta/devicehealth_telegraf:v_1.0.0
     container_name: telegraf
     environment:
       - INFLUX_TOKEN=my-super-secret-auth-token-the-open-factory
@@ -39,10 +39,9 @@ services:
       - monitoring
     volumes:
       - telegraf-volume:/var/lib/telegraf
-      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
   grafana:
-    image: sahebdatta/devicehealth_dashboard:v_0.1.0
+    image: sahebdatta/devicehealth_dashboard:v_1.0.0
     container_name: grafana
     restart: always
     environment:
@@ -54,8 +53,6 @@ services:
       - monitoring
     volumes:
       - grafana-volume:/var/lib/grafana
-      - ./grafana/defaults.ini:/usr/share/grafana/conf/defaults.ini:ro
-      - ./grafana/grafana-provisioning/:/etc/grafana/provisioning
 
 networks:
   monitoring: 
